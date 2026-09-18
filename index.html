@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blueline Pools Kenya — Design, Build & Supply Premium Water Solutions</title>
+<meta name="description" content="Blueline Pools Kenya designs, builds and supplies swimming pools, waterparks, saunas, solar water heaters and firefighting systems across Kenya.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   TOKENS
+   ============================================ */
+:root{
+  --navy-950:#061b33;
+  --navy-900:#0a2a4d;
+  --navy-800:#123a66;
+  --blue-600:#1c7ed6;
+  --blue-500:#2f9bec;
+  --aqua-400:#5fd8ec;
+  --aqua-200:#c7f1f7;
+  --gold-500:#f2b705;
+  --gold-600:#d99a00;
+  --coral-500:#ff6b5b;
+  --sand-50:#f6f3ec;
+  --sand-100:#efe9db;
+  --ink:#0a1c2e;
+  --white:#ffffff;
+  --line: rgba(10,42,77,.12);
+  --shadow-sm: 0 10px 24px -14px rgba(6,27,51,.3);
+  --shadow: 0 24px 60px -24px rgba(6,27,51,.4);
+  --radius-lg: 28px;
+  --radius-md: 16px;
+  --ff-display: 'Fraunces', serif;
+  --ff-body: 'Work Sans', sans-serif;
+  --ff-mono: 'Space Mono', monospace;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family: var(--ff-body);
+  color: var(--ink);
+  background: var(--white);
+  line-height:1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%; display:block;}
+a{color:inherit; text-decoration:none;}
+ul{list-style:none;}
+button{font-family:inherit; cursor:pointer;}
+h1,h2,h3,h4{font-family: var(--ff-display); line-height:1.06; font-weight:600; color: var(--navy-950);}
+.container{max-width:1200px; margin:0 auto; padding:0 clamp(20px,4vw,48px);}
+section{position:relative;}
+.mono{font-family:var(--ff-mono); font-size:.72rem; letter-spacing:.04em;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+}
+:focus-visible{outline:3px solid var(--gold-500); outline-offset:3px; border-radius:4px;}
+
+/* grain texture overlay for premium feel, applied selectively */
+.grain{position:relative;}
+.grain::before{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   SCROLL PROGRESS
+   ============================================ */
+.scroll-progress{position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--aqua-400),var(--gold-500)); width:0%; z-index:120; transition:width .1s linear;}
+
+/* ============================================
+   NAV
+   ============================================ */
+.site-nav{
+  position:fixed; top:0; left:0; right:0; z-index:90;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px clamp(20px,4vw,48px);
+  transition: background .35s ease, padding .35s ease, box-shadow .35s ease;
+}
+.site-nav.scrolled{
+  background: rgba(6,27,51,.88);
+  backdrop-filter: blur(14px);
+  padding-top:13px; padding-bottom:13px;
+  box-shadow: 0 10px 30px -18px rgba(0,0,0,.5);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.brand{display:flex; align-items:center; gap:10px; color:var(--white); font-family:var(--ff-display); font-weight:700; font-size:1.15rem;}
+.brand-mark{width:38px; height:38px; flex-shrink:0;}
+.brand small{display:block; font-family:var(--ff-body); font-weight:500; font-size:.62rem; letter-spacing:.14em; color:var(--aqua-200); text-transform:uppercase; margin-top:1px;}
+.nav-links{display:flex; gap:2.1rem; align-items:center;}
+.nav-links a:not(.nav-cta){color:var(--white); font-weight:500; font-size:.95rem; position:relative; padding:6px 0;}
+.nav-links a:not(.nav-cta)::after{content:""; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--gold-500); transition:width .25s ease;}
+.nav-links a:not(.nav-cta):hover::after, .nav-links a:not(.nav-cta):focus-visible::after{width:100%;}
+.nav-cta{
+  background: var(--gold-500); color: var(--navy-950); font-weight:700;
+  padding:11px 22px; border-radius:999px; font-size:.9rem;
+  box-shadow: 0 8px 18px -8px rgba(242,183,5,.6); transition:transform .2s ease, background .2s ease;
+}
+.nav-cta:hover{background:var(--gold-600); transform:translateY(-1px);}
+.nav-toggle{display:none; flex-direction:column; gap:5px; background:none; border:none; z-index:95;}
+.nav-toggle span{width:26px; height:2px; background:var(--white); display:block; transition:.25s;}
+
+@media (max-width: 880px){
+  .nav-links{
+    position:fixed; inset:0 0 0 auto; width:min(78vw,340px); height:100vh;
+    background: var(--navy-950); flex-direction:column; justify-content:center;
+    padding:0 2.4rem; gap:1.6rem; transform:translateX(100%); transition:transform .35s ease;
+  }
+  .nav-links.open{transform:translateX(0);}
+  .nav-links a:not(.nav-cta){font-size:1.15rem;}
+  .nav-toggle{display:flex;}
+  .site-nav > .nav-cta{display:none;}
+  .nav-links .nav-cta.mobile-only{display:inline-block; margin-top:1rem; width:fit-content;}
+}
+
+/* ============================================
+   HERO — layered parallax + bubbles
+   ============================================ */
+.hero{
+  min-height:100svh; display:flex; align-items:center; position:relative;
+  background:
+    radial-gradient(120% 90% at 12% -10%, rgba(95,216,236,.28), transparent 55%),
+    linear-gradient(180deg, rgba(4,15,28,.78) 0%, rgba(5,18,33,.42) 42%, rgba(4,14,27,.88) 100%),
+    url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=2000&auto=format&fit=crop') center 60%/cover no-repeat;
+  color:var(--white); padding-top:130px; overflow:hidden;
+}
+.hero-bubbles{position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;}
+.hero-bubbles span{
+  position:absolute; bottom:-10%; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), rgba(255,255,255,.05));
+  animation: rise linear infinite;
+}
+@keyframes rise{
+  0%{transform:translateY(0) translateX(0); opacity:0;}
+  10%{opacity:.55;}
+  90%{opacity:.35;}
+  100%{transform:translateY(-118vh) translateX(var(--drift,20px)); opacity:0;}
+}
+.hero::after{
+  content:""; position:absolute; left:0; right:0; bottom:-2px; height:150px; z-index:1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 150' preserveAspectRatio='none'%3E%3Cpath d='M0,70 C220,150 460,0 720,55 C980,110 1220,10 1440,75 L1440,150 L0,150 Z' fill='%23ffffff'/%3E%3C/svg%3E") bottom/100% 100% no-repeat;
+  pointer-events:none;
+}
+.hero-inner{position:relative; z-index:2; max-width:800px;}
+.hero-badge{
+  display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.28); padding:9px 18px; border-radius:999px;
+  font-size:.85rem; font-weight:500; margin-bottom:26px; backdrop-filter: blur(8px);
+}
+.hero-badge svg{width:16px; height:16px; color:var(--gold-500);}
+.hero h1{
+  font-size:clamp(2.6rem, 5.8vw, 4.7rem); color:var(--white); font-weight:600;
+  letter-spacing:-.01em; margin-bottom:24px;
+}
+.hero h1 em{font-style:italic; color:var(--aqua-200); font-weight:500;}
+.hero p.lede{font-size:clamp(1.05rem,1.6vw,1.25rem); color:rgba(255,255,255,.86); max-width:580px; margin-bottom:38px;}
+.hero-actions{display:flex; flex-wrap:wrap; gap:16px; margin-bottom:58px;}
+.btn{
+  display:inline-flex; align-items:center; gap:10px; padding:16px 30px; border-radius:999px;
+  font-weight:700; font-size:.98rem; border:2px solid transparent; transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:var(--gold-500); color:var(--navy-950); box-shadow:0 16px 34px -14px rgba(242,183,5,.6);}
+.btn-primary:hover{background:var(--gold-600);}
+.btn-ghost{border-color:rgba(255,255,255,.5); color:var(--white);}
+.btn-ghost:hover{background:rgba(255,255,255,.12); border-color:var(--white);}
+
+.hero-stats{display:flex; gap:clamp(24px,5vw,60px); flex-wrap:wrap;}
+.hero-stats div{border-left:2px solid var(--gold-500); padding-left:16px;}
+.hero-stats strong{display:block; font-family:var(--ff-display); font-size:clamp(1.7rem,3vw,2.1rem); color:var(--white);}
+.hero-stats span{font-size:.82rem; color:rgba(255,255,255,.68);}
+.count[data-count]{display:inline-block;}
+
+.hero-scroll-cue{
+  position:absolute; bottom:170px; left:50%; transform:translateX(-50%); z-index:3;
+  display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.6); font-size:.72rem;
+  letter-spacing:.08em; text-transform:uppercase; animation: bob 2.4s ease-in-out infinite;
+}
+.hero-scroll-cue svg{width:16px; height:16px;}
+@keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,8px);}}
+
+/* ============================================
+   MARQUEE STRIP
+   ============================================ */
+.ribbon{
+  background:var(--navy-950); color:var(--aqua-200); overflow:hidden; padding:13px 0; position:relative; z-index:2;
+  border-top:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08);
+}
+.ribbon-track{display:flex; gap:3rem; width:max-content; animation: scroll-left 34s linear infinite;}
+.ribbon-track span{font-family:var(--ff-display); font-size:.95rem; letter-spacing:.03em; white-space:nowrap; display:flex; align-items:center; gap:.6rem;}
+.ribbon-track span::before{content:"—"; color:var(--gold-500);}
+@keyframes scroll-left{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ============================================
+   SECTION HEADS
+   ============================================ */
+.section-head{max-width:660px; margin-bottom:56px;}
+.section-tag{color:var(--blue-600); font-weight:700; font-size:.85rem; letter-spacing:.02em; margin-bottom:10px; display:block;}
+.section-head h2{font-size:clamp(1.95rem,3.6vw,2.85rem);}
+.section-head p{color:#4b5c6e; font-size:1.05rem; margin-top:16px;}
+.section-pad{padding:104px 0;}
+.bg-sand{background:var(--sand-50);}
+.bg-navy{background:var(--navy-950); color:#fff;}
+.bg-navy .section-head h2, .bg-navy h3{color:#fff;}
+
+/* ============================================
+   PROCESS TIMELINE (justified: real sequence of build stages)
+   ============================================ */
+.process{position:relative;}
+.process-line{position:absolute; top:78px; left:0; right:0; height:2px; background:var(--line); z-index:0; display:none;}
+.process-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:28px; position:relative; z-index:1;}
+.process-step{padding:0 6px;}
+.process-num{
+  width:64px; height:64px; border-radius:50%; background:var(--navy-950); color:var(--gold-500);
+  display:flex; align-items:center; justify-content:center; font-family:var(--ff-display); font-size:1.5rem;
+  margin-bottom:22px; box-shadow:var(--shadow-sm);
+}
+.process-step h3{font-size:1.25rem; margin-bottom:10px;}
+.process-step p{color:#4b5c6e; font-size:.95rem;}
+@media (max-width:900px){
+  .process-grid{grid-template-columns:1fr 1fr; row-gap:40px;}
+}
+@media (max-width:560px){ .process-grid{grid-template-columns:1fr;} }
+
+/* ============================================
+   SERVICES — interactive index + panel
+   ============================================ */
+.services-wrap{display:grid; grid-template-columns: 300px 1fr; gap:0; border:1px solid var(--line); border-radius: var(--radius-lg); overflow:hidden; background:var(--white); box-shadow:var(--shadow);}
+.service-index{list-style:none; background:var(--navy-950); padding:14px;}
+.service-index button{
+  width:100%; text-align:left; background:none; border:none; color:rgba(255,255,255,.65);
+  padding:18px 16px; border-radius:12px; font-family:var(--ff-display); font-size:1.1rem;
+  display:flex; align-items:center; gap:14px; transition: background .2s ease, color .2s ease;
+}
+.service-index button .dot{width:9px; height:9px; border-radius:50%; background:currentColor; opacity:.4; flex-shrink:0;}
+.service-index button:hover{color:var(--white); background:rgba(255,255,255,.06);}
+.service-index button[aria-selected="true"]{color:var(--white); background:var(--blue-600);}
+.service-index button[aria-selected="true"] .dot{background:var(--gold-500); opacity:1;}
+
+.service-panels{position:relative; min-height:520px;}
+.service-panel{
+  position:absolute; inset:0; padding:44px 44px; display:grid; grid-template-columns: 1.1fr 1fr; gap:36px; align-items:center;
+  opacity:0; visibility:hidden; transform:translateY(8px); transition: opacity .35s ease, transform .35s ease;
+}
+.service-panel.active{position:relative; opacity:1; visibility:visible; transform:translateY(0);}
+.service-panel .copy .tag{
+  display:inline-block; font-size:.78rem; font-weight:700; letter-spacing:.04em; padding:6px 14px;
+  border-radius:999px; margin-bottom:16px; color:var(--white);
+}
+.service-panel h3{font-size:1.85rem; margin-bottom:14px;}
+.service-panel ul{display:grid; gap:11px; margin-top:20px;}
+.service-panel li{display:flex; gap:10px; align-items:flex-start; font-size:.98rem; color:#2c3e50;}
+.service-panel .media{border-radius:var(--radius-md); overflow:hidden; aspect-ratio:4/3.1; box-shadow:var(--shadow);}
+.service-panel .media img{width:100%; height:100%; object-fit:cover;}
+
+@media (max-width: 900px){
+  .services-wrap{grid-template-columns:1fr;}
+  .service-index{display:flex; overflow-x:auto; gap:8px; padding:12px;}
+  .service-index button{white-space:nowrap; padding:12px 16px; font-size:.95rem;}
+  .service-panels{min-height:unset;}
+  .service-panel{grid-template-columns:1fr; padding:30px 24px;}
+  .service-panel .media{order:-1;}
+}
+
+/* ============================================
+   SPOTLIGHT — parallax full-bleed w/ glass stat cards
+   ============================================ */
+.spotlight{
+  min-height:640px; display:flex; align-items:flex-end; position:relative; overflow:hidden;
+  background-attachment: fixed; background-position:center; background-size:cover;
+  background-image:linear-gradient(0deg, rgba(4,14,27,.82), rgba(4,14,27,.15) 55%), url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2000&auto=format&fit=crop');
+}
+@media (max-width:900px){ .spotlight{background-attachment:scroll;} }
+.spotlight-inner{position:relative; z-index:2; width:100%; padding-bottom:64px;}
+.spotlight-head{max-width:560px; color:#fff; margin-bottom:44px;}
+.spotlight-head span{color:var(--aqua-200);}
+.spotlight-head h2{color:#fff; font-size:clamp(1.9rem,3.6vw,2.7rem); margin-top:10px;}
+.spotlight-head p{color:rgba(255,255,255,.78); margin-top:14px; max-width:480px;}
+.glass-row{display:grid; grid-template-columns:repeat(5,1fr); gap:16px;}
+.glass-card{
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.22); backdrop-filter:blur(14px);
+  border-radius:18px; padding:22px 18px; color:#fff;
+}
+.glass-card .ico{width:38px; height:38px; margin-bottom:14px; color:var(--gold-500);}
+.glass-card strong{display:block; font-size:.92rem; margin-bottom:4px;}
+.glass-card span{font-size:.78rem; color:rgba(255,255,255,.65);}
+@media (max-width:980px){ .glass-row{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:560px){ .glass-row{grid-template-columns:1fr;} }
+
+/* ============================================
+   BEFORE / AFTER SLIDER
+   ============================================ */
+.ba-wrap{max-width:900px; margin:0 auto;}
+.ba-slider{
+  position:relative; aspect-ratio:16/9.4; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow);
+  user-select:none; touch-action:none;
+}
+.ba-slider img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+.ba-after{clip-path:inset(0 0 0 50%);}
+.ba-label{position:absolute; top:18px; padding:7px 14px; border-radius:999px; font-size:.78rem; font-weight:700; background:rgba(6,27,51,.72); color:#fff; backdrop-filter:blur(6px);}
+.ba-label.before{left:18px;}
+.ba-label.after{right:18px;}
+.ba-handle{
+  position:absolute; top:0; bottom:0; left:50%; width:0; display:flex; align-items:center; justify-content:center;
+  cursor:ew-resize; transform:translateX(-50%);
+}
+.ba-handle::before{content:""; position:absolute; top:0; bottom:0; left:50%; width:3px; background:#fff; transform:translateX(-50%); box-shadow:0 0 0 2px rgba(0,0,0,.08);}
+.ba-grip{
+  width:46px; height:46px; border-radius:50%; background:#fff; box-shadow:var(--shadow-sm);
+  display:flex; align-items:center; justify-content:center; gap:2px; color:var(--navy-950); position:relative; z-index:2;
+}
+.ba-grip svg{width:16px; height:16px;}
+.ba-caption{text-align:center; margin-top:20px; color:#4b5c6e; font-size:.92rem;}
+
+/* ============================================
+   TRUST STRIP (compact, used near footer of gallery)
+   ============================================ */
+.trust-strip{display:flex; flex-wrap:wrap; justify-content:space-between; gap:28px; padding:52px 0;}
+.trust-item{display:flex; align-items:center; gap:14px; flex:1 1 190px;}
+.trust-item .ico{
+  width:52px; height:52px; border-radius:50%; background:var(--navy-950); color:var(--gold-500);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.trust-item .ico svg{width:24px; height:24px;}
+.trust-item strong{display:block; font-size:.95rem; color:var(--navy-950);}
+.trust-item span{font-size:.82rem; color:#5c6b7a;}
+
+/* ============================================
+   GALLERY with filters
+   ============================================ */
+.gallery-filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px;}
+.gallery-filters button{
+  padding:9px 18px; border-radius:999px; border:1.5px solid var(--line); background:#fff; font-size:.88rem; font-weight:600; color:#4b5c6e;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+}
+.gallery-filters button:hover{border-color:var(--blue-600); color:var(--blue-600);}
+.gallery-filters button.active{background:var(--navy-950); border-color:var(--navy-950); color:#fff;}
+
+.gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:180px; gap:14px;}
+.gallery-grid button{
+  border:none; padding:0; border-radius:14px; overflow:hidden; position:relative; background:var(--navy-900); transition:opacity .3s ease, transform .3s ease;
+}
+.gallery-grid button.hidden{display:none;}
+.gallery-grid button img{width:100%; height:100%; object-fit:cover; transition: transform .5s ease;}
+.gallery-grid button:hover img{transform:scale(1.07);}
+.gallery-grid button::after{
+  content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,27,51,.6), transparent 55%);
+  opacity:0; transition:opacity .3s ease;
+}
+.gallery-grid button:hover::after{opacity:1;}
+.gallery-grid button .cap{position:absolute; left:14px; bottom:12px; color:#fff; font-size:.82rem; font-weight:600; opacity:0; transition:opacity .3s ease;}
+.gallery-grid button:hover .cap{opacity:1;}
+.g-tall{grid-row: span 2;}
+.g-wide{grid-column: span 2;}
+@media (max-width:760px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:150px;}
+  .g-wide{grid-column:span 2;}
+}
+
+.lightbox{position:fixed; inset:0; background:rgba(6,20,38,.94); z-index:200; display:flex; align-items:center; justify-content:center; padding:5vh 5vw; opacity:0; visibility:hidden; transition:opacity .3s ease;}
+.lightbox.open{opacity:1; visibility:visible;}
+.lightbox img{max-width:100%; max-height:85vh; border-radius:12px; box-shadow:0 30px 80px rgba(0,0,0,.5);}
+.lightbox .lb-close, .lightbox .lb-nav{
+  position:absolute; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.3); color:#fff;
+  width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem;
+}
+.lightbox .lb-close{top:26px; right:26px;}
+.lightbox .lb-prev{left:20px; top:50%; transform:translateY(-50%);}
+.lightbox .lb-next{right:20px; top:50%; transform:translateY(-50%);}
+.lightbox .lb-close:hover, .lightbox .lb-nav:hover{background:rgba(255,255,255,.25);}
+
+/* ============================================
+   TESTIMONIALS
+   ============================================ */
+.testi-wrap{position:relative; max-width:780px; margin:0 auto; text-align:center;}
+.testi-slide{display:none; animation: fade-in .5s ease;}
+.testi-slide.active{display:block;}
+@keyframes fade-in{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+.testi-stars{color:var(--gold-500); margin-bottom:22px; display:flex; justify-content:center; gap:4px;}
+.testi-stars svg{width:20px; height:20px;}
+.testi-quote{font-family:var(--ff-display); font-size:clamp(1.25rem,2.4vw,1.65rem); color:var(--navy-950); font-weight:500; line-height:1.4; margin-bottom:28px;}
+.testi-person{display:flex; align-items:center; justify-content:center; gap:12px;}
+.testi-avatar{width:46px; height:46px; border-radius:50%; background:var(--navy-950); color:var(--gold-500); display:flex; align-items:center; justify-content:center; font-family:var(--ff-display); font-weight:700;}
+.testi-person strong{display:block; font-size:.95rem;}
+.testi-person span{font-size:.82rem; color:#5c6b7a;}
+.testi-dots{display:flex; justify-content:center; gap:9px; margin-top:36px;}
+.testi-dots button{width:9px; height:9px; border-radius:50%; background:var(--line); border:none; padding:0; transition:background .2s ease, transform .2s ease;}
+.testi-dots button.active{background:var(--blue-600); transform:scale(1.3);}
+
+/* ============================================
+   ABOUT
+   ============================================ */
+.about{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;}
+.about-media{position:relative; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow);}
+.about-media img{aspect-ratio:5/4.3; object-fit:cover;}
+.about-badge{
+  position:absolute; bottom:-1px; right:-1px; background:var(--gold-500); color:var(--navy-950);
+  padding:20px 26px; border-top-left-radius:var(--radius-md); text-align:center; font-family:var(--ff-display);
+}
+.about-badge strong{display:block; font-size:2rem;}
+.about-badge span{font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em;}
+.about-copy p{color:#3b4b5c; margin-bottom:18px; font-size:1.03rem;}
+.about-copy .checklist{display:grid; gap:12px; margin-top:26px;}
+.about-copy .checklist li{display:flex; gap:10px; align-items:center; font-weight:600; color:var(--navy-950);}
+.about-copy .checklist svg{width:20px; height:20px; color:var(--blue-600); flex-shrink:0;}
+
+@media (max-width:880px){ .about{grid-template-columns:1fr;} }
+
+/* ============================================
+   FAQ ACCORDION
+   ============================================ */
+.faq-wrap{max-width:800px; margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-item summary{
+  list-style:none; display:flex; justify-content:space-between; align-items:center; gap:20px;
+  padding:24px 4px; font-family:var(--ff-display); font-size:1.15rem; cursor:pointer; color:var(--navy-950);
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item .plus{width:28px; height:28px; border-radius:50%; border:1.5px solid var(--line); display:flex; align-items:center; justify-content:center; flex-shrink:0; position:relative; transition:transform .25s ease, background .25s ease;}
+.faq-item .plus::before, .faq-item .plus::after{content:""; position:absolute; background:var(--navy-950); transition:transform .25s ease;}
+.faq-item .plus::before{width:12px; height:2px;}
+.faq-item .plus::after{width:2px; height:12px;}
+.faq-item[open] .plus{background:var(--blue-600); border-color:var(--blue-600);}
+.faq-item[open] .plus::before, .faq-item[open] .plus::after{background:#fff;}
+.faq-item[open] .plus::after{transform:rotate(90deg) scaleY(0);}
+.faq-item p{padding:0 4px 26px; color:#4b5c6e; font-size:.98rem; max-width:640px;}
+
+/* ============================================
+   CONTACT
+   ============================================ */
+.contact-wrap{display:grid; grid-template-columns:1.05fr 1fr; gap:0; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow);}
+.contact-info{background:var(--navy-950); color:#fff; padding:52px 44px; position:relative; overflow:hidden;}
+.contact-info h3{color:#fff; font-size:1.7rem; margin-bottom:16px;}
+.contact-info p{color:rgba(255,255,255,.78); margin-bottom:30px; max-width:380px;}
+.contact-line{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+.contact-line .ico{width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.contact-line .ico svg{width:20px; height:20px; color:var(--gold-500);}
+.contact-line strong{display:block; font-size:.98rem;}
+.contact-line span{font-size:.85rem; color:rgba(255,255,255,.65);}
+.contact-wa{
+  margin-top:30px; display:inline-flex; align-items:center; gap:10px; background:#25D366; color:#fff;
+  padding:14px 24px; border-radius:999px; font-weight:700;
+}
+.contact-wa:hover{background:#1fb958;}
+.contact-form{background:#fff; padding:52px 44px;}
+.field{margin-bottom:20px;}
+.field label{display:block; font-size:.85rem; font-weight:600; margin-bottom:7px; color:var(--navy-950);}
+.field input, .field select, .field textarea{
+  width:100%; padding:13px 15px; border-radius:10px; border:1.5px solid var(--line); font-family:inherit; font-size:.96rem; color:var(--ink); background:#fbfcfe;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field input:focus, .field select:focus, .field textarea:focus{border-color:var(--blue-600); box-shadow:0 0 0 4px rgba(28,126,214,.12); outline:none;}
+.field textarea{resize:vertical; min-height:100px;}
+.field .err{color:#c0392b; font-size:.8rem; margin-top:6px; display:none;}
+.field.invalid input, .field.invalid select, .field.invalid textarea{border-color:#c0392b;}
+.field.invalid .err{display:block;}
+.form-msg{display:none; padding:14px 16px; border-radius:10px; background:#e5f7ec; color:#1c7a44; font-weight:600; margin-bottom:18px; font-size:.92rem;}
+.form-msg.show{display:block;}
+.submit-btn{width:100%; background:var(--navy-950); color:#fff; padding:15px; border-radius:999px; font-weight:700; font-size:1rem; border:none; transition:background .2s ease, transform .2s ease;}
+.submit-btn:hover{background:var(--blue-600); transform:translateY(-1px);}
+
+@media (max-width:900px){ .contact-wrap{grid-template-columns:1fr;} }
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer{background:var(--navy-950); color:rgba(255,255,255,.75); padding:64px 0 28px; position:relative;}
+.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:48px;}
+.footer-brand p{margin-top:14px; color:rgba(255,255,255,.6); max-width:280px; font-size:.92rem;}
+.footer-col h4{color:#fff; font-family:var(--ff-body); font-size:.92rem; font-weight:700; margin-bottom:16px; letter-spacing:.02em;}
+.footer-col ul{display:grid; gap:10px;}
+.footer-col a{font-size:.92rem; color:rgba(255,255,255,.65); transition:color .2s ease;}
+.footer-col a:hover{color:var(--gold-500);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12); padding-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:.82rem; color:rgba(255,255,255,.5);}
+.footer-flag{display:inline-flex; align-items:center; gap:8px;}
+.footer-flag svg{width:22px; height:15px; border-radius:2px;}
+
+@media (max-width:820px){ .footer-grid{grid-template-columns:1fr 1fr;} }
+
+/* ============================================
+   FLOATING WHATSAPP + BACK TO TOP
+   ============================================ */
+.float-stack{position:fixed; right:22px; bottom:22px; z-index:80; display:flex; flex-direction:column; gap:12px; align-items:flex-end;}
+.fab{
+  width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 12px 26px -8px rgba(0,0,0,.4); border:none; color:#fff;
+}
+.fab-wa{background:#25D366; position:relative;}
+.fab-wa::before{
+  content:""; position:absolute; inset:0; border-radius:50%; background:#25D366; opacity:.55;
+  animation: pulse-ring 2.2s ease-out infinite;
+}
+.fab-wa svg{width:28px; height:28px; position:relative; z-index:1;}
+@keyframes pulse-ring{ 0%{transform:scale(1); opacity:.55;} 100%{transform:scale(1.7); opacity:0;} }
+.fab-top{background:var(--navy-950); width:44px; height:44px; opacity:0; transform:translateY(8px); pointer-events:none; transition:opacity .25s ease, transform .25s ease;}
+.fab-top.show{opacity:1; transform:translateY(0); pointer-events:auto;}
+.fab-top svg{width:18px; height:18px;}
+
+/* ============================================
+   REVEAL ANIMATION
+   ============================================ */
+.reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+.reveal-stagger.in > *{opacity:1; transform:translateY(0);}
+.reveal-stagger > *{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+.reveal-stagger > *:nth-child(1){transition-delay:.05s;}
+.reveal-stagger > *:nth-child(2){transition-delay:.14s;}
+.reveal-stagger > *:nth-child(3){transition-delay:.23s;}
+.reveal-stagger > *:nth-child(4){transition-delay:.32s;}
+.reveal-stagger > *:nth-child(5){transition-delay:.41s;}
+
+/* Skip link */
+.skip-link{position:absolute; left:-999px; top:0; background:#fff; color:#000; padding:12px 18px; z-index:999; border-radius:0 0 8px 0;}
+.skip-link:focus{left:0;}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ============================================
+     NAV
+     ============================================ -->
+<header class="site-nav" id="siteNav">
+  <a href="#main" class="brand">
+    <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="24" cy="24" r="23" fill="#0a2a4d" stroke="#5fd8ec" stroke-width="1.5"/>
+      <path d="M8 22c3-4 6-4 9 0s6 4 9 0 6-4 9 0" stroke="#5fd8ec" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+      <path d="M8 29c3-4 6-4 9 0s6 4 9 0 6-4 9 0" stroke="#f2b705" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span>Blueline Pools<small>Kenya</small></span>
+  </a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#process" data-nav>Process</a>
+    <a href="#services" data-nav>Services</a>
+    <a href="#gallery" data-nav>Gallery</a>
+    <a href="#about" data-nav>About</a>
+    <a href="#contact" data-nav>Contact</a>
+    <a href="#contact" class="nav-cta mobile-only">Get a quote</a>
+  </nav>
+  <a href="#contact" class="nav-cta">Get a Free Quote</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="main">
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero">
+  <div class="hero-bubbles" id="heroBubbles" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <span class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.1-6.3-4.5-6.3 4.5 2.3-7.1-6-4.4h7.6z"/></svg>
+      Trusted across all 47 counties in Kenya
+    </span>
+    <h1>We design, build &amp; supply <em>premium water solutions</em></h1>
+    <p class="lede">From infinity pools and waterparks to saunas, solar heating and firefighting systems — Blueline Pools Kenya turns your vision into lasting quality, backed by our own engineers from concept to completion.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        Get a Free Quote
+      </a>
+      <a href="https://wa.me/254726117905" class="btn btn-ghost" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.2L2 22l4.9-1.3c1.5.8 3.3 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3C4.2 15 3.8 13.5 3.8 12c0-4.5 3.7-8.2 8.2-8.2s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+    <div class="hero-stats" id="heroStats">
+      <div><strong><span class="count" data-count="500">0</span>+</strong><span>Pools &amp; systems delivered</span></div>
+      <div><strong><span class="count" data-count="47">0</span></strong><span>Counties served</span></div>
+      <div><strong><span class="count" data-count="12">0</span>+</strong><span>Years in business</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll-cue">
+    Scroll
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<div class="ribbon" aria-hidden="true">
+  <div class="ribbon-track" id="ribbonTrack">
+    <span>Swimming Pools</span><span>Waterparks</span><span>Sauna</span><span>Solar Water Heaters</span><span>Firefighting Systems</span>
+    <span>Swimming Pools</span><span>Waterparks</span><span>Sauna</span><span>Solar Water Heaters</span><span>Firefighting Systems</span>
+  </div>
+</div>
+
+<!-- ============================================
+     PROCESS — real build sequence, numbering earned
+     ============================================ -->
+<section class="section-pad" id="process">
+  <div class="container process">
+    <div class="section-head reveal">
+      <span class="section-tag">How we work</span>
+      <h2>From first site visit to final handover</h2>
+      <p>One team carries your project through every stage — so nothing gets lost between a designer, a contractor and a supplier.</p>
+    </div>
+    <div class="process-grid reveal-stagger reveal">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h3>Site visit &amp; consultation</h3>
+        <p>We assess your land, water access and goals, then talk through budget and timeline honestly.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h3>Design &amp; quotation</h3>
+        <p>You get a detailed design, materials list and fixed quote before any ground is broken.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h3>Build &amp; installation</h3>
+        <p>Our own crews handle excavation, structure, finishing and equipment — no subcontractor guesswork.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <h3>Handover &amp; support</h3>
+        <p>We walk you through operation and maintenance, then stay reachable on our 24/7 line.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SERVICES
+     ============================================ -->
+<section class="section-pad bg-sand" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">What we do</span>
+      <h2>Five disciplines, one contractor</h2>
+      <p>Every project is designed, built and supported in-house — so your pool, waterpark, sauna, solar heater or firefighting system all work as one system, not five separate vendors.</p>
+    </div>
+
+    <div class="services-wrap reveal">
+      <ul class="service-index" role="tablist" aria-label="Our services" id="serviceIndex">
+        <li role="presentation"><button role="tab" aria-selected="true" data-target="p-pools"><span class="dot"></span>Swimming Pools</button></li>
+        <li role="presentation"><button role="tab" aria-selected="false" data-target="p-parks"><span class="dot"></span>Waterparks</button></li>
+        <li role="presentation"><button role="tab" aria-selected="false" data-target="p-sauna"><span class="dot"></span>Sauna</button></li>
+        <li role="presentation"><button role="tab" aria-selected="false" data-target="p-solar"><span class="dot"></span>Solar Water Heater</button></li>
+        <li role="presentation"><button role="tab" aria-selected="false" data-target="p-fire"><span class="dot"></span>Firefighting</button></li>
+      </ul>
+
+      <div class="service-panels">
+
+        <div class="service-panel active" id="p-pools" role="tabpanel">
+          <div class="copy">
+            <span class="tag" style="background:var(--blue-600)">Swimming Pools</span>
+            <h3>Pools built for how you'll actually use them</h3>
+            <p style="color:#4b5c6e">Residential lap pools, hotel infinity edges, commercial pools — designed around your site, your climate, and your maintenance budget.</p>
+            <ul>
+              <li>✓&nbsp; Custom designs</li>
+              <li>✓&nbsp; Residential &amp; commercial</li>
+              <li>✓&nbsp; Renovations &amp; repairs</li>
+              <li>✓&nbsp; Pool equipment supply</li>
+              <li>✓&nbsp; Filtration systems</li>
+            </ul>
+          </div>
+          <div class="media"><img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=900&auto=format&fit=crop" alt="Infinity swimming pool overlooking hills"></div>
+        </div>
+
+        <div class="service-panel" id="p-parks" role="tabpanel">
+          <div class="copy">
+            <span class="tag" style="background:#1c9fd6">Waterparks</span>
+            <h3>Waterparks that keep families coming back</h3>
+            <p style="color:#4b5c6e">Slides, wave pools and play structures engineered for safety and throughput, delivered as a turnkey attraction.</p>
+            <ul>
+              <li>✓&nbsp; Design &amp; construction</li>
+              <li>✓&nbsp; Slides &amp; play structures</li>
+              <li>✓&nbsp; Wave pools</li>
+              <li>✓&nbsp; Maintenance &amp; support</li>
+              <li>✓&nbsp; Turnkey solutions</li>
+            </ul>
+          </div>
+          <div class="media"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=900&auto=format&fit=crop" alt="Colourful waterpark slides"></div>
+        </div>
+
+        <div class="service-panel" id="p-sauna" role="tabpanel">
+          <div class="copy">
+            <span class="tag" style="background:#d9812c">Sauna</span>
+            <h3>A dedicated place to unwind</h3>
+            <p style="color:#4b5c6e">Indoor or outdoor, steam or dry — built with high-quality timber and fittings that hold up to daily use.</p>
+            <ul>
+              <li>✓&nbsp; Indoor &amp; outdoor saunas</li>
+              <li>✓&nbsp; Steam &amp; dry saunas</li>
+              <li>✓&nbsp; Custom designs</li>
+              <li>✓&nbsp; High-quality materials</li>
+              <li>✓&nbsp; Installation &amp; servicing</li>
+            </ul>
+          </div>
+          <div class="media"><img src="https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=900&auto=format&fit=crop" alt="Warm wooden sauna interior"></div>
+        </div>
+
+        <div class="service-panel" id="p-solar" role="tabpanel">
+          <div class="copy">
+            <span class="tag" style="background:#1c9d5c">Solar Water Heater</span>
+            <h3>Hot water that pays for itself</h3>
+            <p style="color:#4b5c6e">Cut your energy bill with a solar system sized to your household or property, installed and backed by our support team.</p>
+            <ul>
+              <li>✓&nbsp; Energy efficient</li>
+              <li>✓&nbsp; Cost saving</li>
+              <li>✓&nbsp; Reliable hot water</li>
+              <li>✓&nbsp; Residential &amp; commercial</li>
+              <li>✓&nbsp; Installation &amp; support</li>
+            </ul>
+          </div>
+          <div class="media"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=900&auto=format&fit=crop" alt="Solar water heater panels on roof"></div>
+        </div>
+
+        <div class="service-panel" id="p-fire" role="tabpanel">
+          <div class="copy">
+            <span class="tag" style="background:#c0392b">Firefighting</span>
+            <h3>Fire safety systems you can rely on</h3>
+            <p style="color:#4b5c6e">From pumps to sprinklers, we design, install and maintain complete firefighting systems for commercial and residential sites.</p>
+            <ul>
+              <li>✓&nbsp; Fire pumps</li>
+              <li>✓&nbsp; Sprinkler systems</li>
+              <li>✓&nbsp; Fire hose reels</li>
+              <li>✓&nbsp; Extinguishers</li>
+              <li>✓&nbsp; Design, installation &amp; maintenance</li>
+            </ul>
+          </div>
+          <div class="media"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=900&auto=format&fit=crop" alt="Firefighting equipment and hose reel"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SPOTLIGHT — parallax banner w/ glass trust cards
+     ============================================ -->
+<section class="spotlight">
+  <div class="container spotlight-inner">
+    <div class="spotlight-head reveal">
+      <span class="mono">FEATURED PROJECT</span>
+      <h2>A rooftop infinity pool, engineered for Nairobi's skyline</h2>
+      <p>Five reasons property owners across Kenya keep choosing Blueline Pools for projects like this one.</p>
+    </div>
+    <div class="glass-row reveal-stagger reveal">
+      <div class="glass-card">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></span>
+        <strong>Quality Workmanship</strong><span>Built to last, not just to look good</span>
+      </div>
+      <div class="glass-card">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.34 1.87l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.7 1.7 0 00-1.87-.34 1.7 1.7 0 00-1 1.55V21a2 2 0 01-4 0v-.09a1.7 1.7 0 00-1-1.55 1.7 1.7 0 00-1.87.34l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.7 1.7 0 00.34-1.87 1.7 1.7 0 00-1.55-1H3a2 2 0 010-4h.09a1.7 1.7 0 001.55-1 1.7 1.7 0 00-.34-1.87l-.06-.06a2 2 0 112.83-2.83l.06.06a1.7 1.7 0 001.87.34H9a1.7 1.7 0 001-1.55V3a2 2 0 014 0v.09a1.7 1.7 0 001 1.55 1.7 1.7 0 001.87-.34l.06-.06a2 2 0 112.83 2.83l-.06.06a1.7 1.7 0 00-.34 1.87V9a1.7 1.7 0 001.55 1H21a2 2 0 010 4h-.09a1.7 1.7 0 00-1.55 1z"/></svg></span>
+        <strong>Professional Team</strong><span>In-house engineers &amp; installers</span>
+      </div>
+      <div class="glass-card">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12l3 3 5-6"/><path d="M2 12a10 10 0 1120 0 10 10 0 01-20 0z"/></svg></span>
+        <strong>Competitive Prices</strong><span>Transparent quotes, no surprises</span>
+      </div>
+      <div class="glass-card">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+        <strong>24/7 Support</strong><span>We answer when you need us</span>
+      </div>
+      <div class="glass-card">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+        <strong>All Regions in Kenya</strong><span>Nairobi to the coast, we travel</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     BEFORE / AFTER
+     ============================================ -->
+<section class="section-pad">
+  <div class="container">
+    <div class="section-head reveal" style="margin-left:auto; margin-right:auto; text-align:center;">
+      <span class="section-tag">Renovations</span>
+      <h2>See the difference a rebuild makes</h2>
+      <p>Drag the slider to compare a tired, cracked pool shell before and after a full Blueline renovation.</p>
+    </div>
+    <div class="ba-wrap reveal">
+      <div class="ba-slider" id="baSlider">
+        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1400&auto=format&fit=crop" alt="Pool before renovation, worn and faded"/>
+        <img class="ba-after" id="baAfter" src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=1400&auto=format&fit=crop" alt="Pool after Blueline renovation, crisp blue water"/>
+        <span class="ba-label before">Before</span>
+        <span class="ba-label after">After</span>
+        <div class="ba-handle" id="baHandle">
+          <div class="ba-grip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
+          </div>
+        </div>
+      </div>
+      <p class="ba-caption">Drag left or right — or use the arrow keys once focused.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     GALLERY
+     ============================================ -->
+<section class="section-pad bg-sand" id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">Recent work</span>
+      <h2>A look at what we've built</h2>
+      <p>A selection of pools, waterparks and wellness spaces completed across Kenya. Filter by category or tap any image to view it larger.</p>
+    </div>
+
+    <div class="gallery-filters reveal" id="galleryFilters">
+      <button class="active" data-filter="all">All work</button>
+      <button data-filter="pools">Swimming Pools</button>
+      <button data-filter="parks">Waterparks</button>
+      <button data-filter="sauna">Sauna</button>
+      <button data-filter="solar">Solar</button>
+    </div>
+
+    <div class="gallery-grid reveal" id="galleryGrid">
+      <button class="g-wide g-tall" data-cat="pools" data-full="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=1600&auto=format&fit=crop" data-cap="Rooftop infinity pool, Nairobi">
+        <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=700&auto=format&fit=crop" alt="Rooftop infinity pool overlooking the city" loading="lazy"><span class="cap">Rooftop infinity pool, Nairobi</span>
+      </button>
+      <button data-cat="parks" data-full="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1600&auto=format&fit=crop" data-cap="Family waterpark slides">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=500&auto=format&fit=crop" alt="Waterpark slides" loading="lazy"><span class="cap">Family waterpark slides</span>
+      </button>
+      <button data-cat="pools" data-full="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=1600&auto=format&fit=crop" data-cap="Residential lap pool">
+        <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=500&auto=format&fit=crop" alt="Residential lap pool" loading="lazy"><span class="cap">Residential lap pool</span>
+      </button>
+      <button data-cat="sauna" data-full="https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=1600&auto=format&fit=crop" data-cap="Custom timber sauna">
+        <img src="https://images.unsplash.com/photo-1620733723572-11c53f73a416?q=80&w=500&auto=format&fit=crop" alt="Timber sauna interior" loading="lazy"><span class="cap">Custom timber sauna</span>
+      </button>
+      <button class="g-wide" data-cat="pools" data-full="https://images.unsplash.com/photo-1622396636133-ba032c04a08c?q=80&w=1600&auto=format&fit=crop" data-cap="Hotel pool deck &amp; loungers">
+        <img src="https://images.unsplash.com/photo-1622396636133-ba032c04a08c?q=80&w=700&auto=format&fit=crop" alt="Hotel pool deck with loungers" loading="lazy"><span class="cap">Hotel pool deck &amp; loungers</span>
+      </button>
+      <button data-cat="solar" data-full="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1600&auto=format&fit=crop" data-cap="Solar water heater install">
+        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=500&auto=format&fit=crop" alt="Solar water heater on rooftop" loading="lazy"><span class="cap">Solar water heater install</span>
+      </button>
+    </div>
+
+    <div class="trust-strip reveal" style="margin-top:20px;">
+      <div class="trust-item">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+        <div><strong>Free site assessment</strong><span>No obligation, honest advice</span></div>
+      </div>
+      <div class="trust-item">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 10-7.78 7.78L12 21l8.84-8.61a5.5 5.5 0 000-7.78z"/></svg></span>
+        <div><strong>Guaranteed workmanship</strong><span>Written warranty on every build</span></div>
+      </div>
+      <div class="trust-item">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+        <div><strong>Fixed project timelines</strong><span>We tell you the date, we keep it</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+  <button class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">&larr;</button>
+  <img id="lbImage" src="" alt="">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next image">&rarr;</button>
+</div>
+
+<!-- ============================================
+     TESTIMONIALS
+     ============================================ -->
+<section class="section-pad">
+  <div class="container">
+    <div class="section-head reveal" style="margin-left:auto; margin-right:auto; text-align:center;">
+      <span class="section-tag">What clients say</span>
+      <h2>Kept honest by the people we've built for</h2>
+    </div>
+    <div class="testi-wrap reveal" id="testiWrap">
+      <div class="testi-slide active">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"They quoted a fixed price and a fixed date — and hit both. Our rooftop pool has held up through two rainy seasons without a single leak."</p>
+        <div class="testi-person">
+          <div class="testi-avatar">RM</div>
+          <div><strong>Rita Mwangi</strong><span>Homeowner, Nairobi</span></div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"We hired Blueline for both the hotel pool and the fire safety retrofit. Having one contractor for both saved us months of coordination."</p>
+        <div class="testi-person">
+          <div class="testi-avatar">DK</div>
+          <div><strong>David Kiptoo</strong><span>Facilities Manager, Coastal Resort</span></div>
+        </div>
+      </div>
+      <div class="testi-slide">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Our old pool was cracked and green. Three weeks later it's the best-looking thing on the property, and the solar heater cut our gas bill in half."</p>
+        <div class="testi-person">
+          <div class="testi-avatar">AN</div>
+          <div><strong>Amina Noor</strong><span>Homeowner, Mombasa</span></div>
+        </div>
+      </div>
+      <div class="testi-dots" id="testiDots">
+        <button class="active" data-i="0" aria-label="Testimonial 1"></button>
+        <button data-i="1" aria-label="Testimonial 2"></button>
+        <button data-i="2" aria-label="Testimonial 3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     ABOUT
+     ============================================ -->
+<section class="section-pad bg-sand" id="about">
+  <div class="container about">
+    <div class="about-media reveal">
+      <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=900&auto=format&fit=crop" alt="Blueline Pools team working on a pool build">
+      <div class="about-badge"><strong>12+</strong><span>Years building</span></div>
+    </div>
+    <div class="about-copy reveal">
+      <span class="section-tag">About Blueline Pools Kenya</span>
+      <h2>Your vision, our expertise, lasting quality</h2>
+      <p>We're a Kenyan design-and-build contractor working across swimming pools, waterparks, saunas, solar water heating and firefighting systems. Instead of subcontracting each discipline out, we keep design, construction and after-sales support under one roof — so timelines, budgets and quality stay in our control from the first sketch to the final handover.</p>
+      <p>Whether it's a private garden pool, a hotel waterpark, or a commercial fire safety retrofit, our team sizes the job to your site, your budget and Kenya's climate — then stands behind it with ongoing maintenance and 24/7 support.</p>
+      <ul class="checklist">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> In-house design &amp; engineering team</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Materials sourced for Kenyan conditions</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Maintenance contracts after handover</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FAQ
+     ============================================ -->
+<section class="section-pad">
+  <div class="container">
+    <div class="section-head reveal" style="margin-left:auto; margin-right:auto; text-align:center;">
+      <span class="section-tag">Questions we hear often</span>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-wrap reveal" id="faqWrap">
+      <details class="faq-item" open>
+        <summary>How long does a typical pool build take?<span class="plus"></span></summary>
+        <p>Most residential pools take 6–10 weeks from groundbreaking to handover, depending on size and design complexity. Commercial waterparks and large hotel pools typically run 3–6 months. You'll get an exact timeline in your written quote.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you work outside Nairobi?<span class="plus"></span></summary>
+        <p>Yes — we serve all 47 counties in Kenya. Our teams have completed projects on the coast, in the Rift Valley, and in upcountry towns, with travel and logistics built into the quote.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can you renovate an existing pool instead of a new build?<span class="plus"></span></summary>
+        <p>Absolutely. Cracked shells, failed filtration, outdated tiling and leaks are some of our most common renovation jobs — often finished faster and at a lower cost than starting from scratch.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is maintenance included after the project is done?<span class="plus"></span></summary>
+        <p>Every build comes with a written workmanship warranty, and we offer ongoing maintenance contracts covering filtration, water treatment and equipment servicing for pools, saunas and solar heaters.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do I get an accurate quote?<span class="plus"></span></summary>
+        <p>Send your location, rough size and the service you need through the contact form below, or message us directly on WhatsApp. We'll follow up to schedule a free site visit and prepare a fixed quote.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CONTACT
+     ============================================ -->
+<section class="section-pad bg-sand" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">Get in touch</span>
+      <h2>Let's build your dream together</h2>
+      <p>Tell us about your project and we'll get back to you with a free, no-obligation quote — usually within one business day.</p>
+    </div>
+
+    <div class="contact-wrap reveal">
+      <div class="contact-info">
+        <h3>Talk to our team</h3>
+        <p>We serve all regions in Kenya. Call, WhatsApp, or send the form and a project consultant will follow up directly.</p>
+
+        <div class="contact-line">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg></span>
+          <div><strong>0726 117 905</strong><span>Call or WhatsApp, 24/7</span></div>
+        </div>
+        <div class="contact-line">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+          <div><strong>Kenya — all regions</strong><span>Nairobi, coast, upcountry &amp; beyond</span></div>
+        </div>
+        <div class="contact-line">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+          <div><strong>24/7 support line</strong><span>Emergency repairs &amp; call-outs</span></div>
+        </div>
+
+        <a href="https://wa.me/254726117905" class="contact-wa" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.2L2 22l4.9-1.3c1.5.8 3.3 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3C4.2 15 3.8 13.5 3.8 12c0-4.5 3.7-8.2 8.2-8.2s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2z"/></svg>
+          Message us on WhatsApp
+        </a>
+      </div>
+
+      <form class="contact-form" id="quoteForm" novalidate>
+        <div class="form-msg" id="formMsg">Thanks — your request has been prepared. We'll be in touch shortly.</div>
+
+        <div class="field" id="f-name">
+          <label for="name">Full name</label>
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="Jane Wanjiru">
+          <span class="err">Please enter your name.</span>
+        </div>
+
+        <div class="field" id="f-phone">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="0726 117 905">
+          <span class="err">Enter a valid Kenyan phone number, e.g. 0726117905.</span>
+        </div>
+
+        <div class="field" id="f-service">
+          <label for="service">Service interested in</label>
+          <select id="service" name="service">
+            <option value="">Select a service</option>
+            <option>Swimming Pools</option>
+            <option>Waterparks</option>
+            <option>Sauna</option>
+            <option>Solar Water Heater</option>
+            <option>Firefighting</option>
+          </select>
+          <span class="err">Please choose a service.</span>
+        </div>
+
+        <div class="field" id="f-message">
+          <label for="message">Tell us about your project</label>
+          <textarea id="message" name="message" placeholder="Location, approximate size, timeline..."></textarea>
+          <span class="err">A short message helps us prepare your quote.</span>
+        </div>
+
+        <button type="submit" class="submit-btn">Request my free quote</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#main" class="brand" style="font-size:1.1rem;">
+          <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="34" height="34">
+            <circle cx="24" cy="24" r="23" fill="#0a2a4d" stroke="#5fd8ec" stroke-width="1.5"/>
+            <path d="M8 22c3-4 6-4 9 0s6 4 9 0 6-4 9 0" stroke="#5fd8ec" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+            <path d="M8 29c3-4 6-4 9 0s6 4 9 0 6-4 9 0" stroke="#f2b705" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+          </svg>
+          <span>Blueline Pools<small>Kenya</small></span>
+        </a>
+        <p>We design, build and supply premium water solutions — pools, waterparks, saunas, solar heating and firefighting systems, across all of Kenya.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Swimming Pools</a></li>
+          <li><a href="#services">Waterparks</a></li>
+          <li><a href="#services">Sauna</a></li>
+          <li><a href="#services">Solar Water Heater</a></li>
+          <li><a href="#services">Firefighting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#process">How we work</a></li>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#gallery">Our work</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="tel:+254726117905">0726 117 905</a></li>
+          <li><a href="https://wa.me/254726117905" target="_blank" rel="noopener">WhatsApp us</a></li>
+          <li><span>All regions, Kenya</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Blueline Pools Kenya. All rights reserved.</span>
+      <span class="footer-flag">
+        <svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#fff"/><rect width="30" height="6.2" fill="#000"/><rect y="13.8" width="30" height="6.2" fill="#006400"/><rect y="6.2" width="30" height="1" fill="#fff"/><rect y="12.8" width="30" height="1" fill="#fff"/><rect y="7.2" width="30" height="5.6" fill="#b40000"/></svg>
+        Proudly Kenyan
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     FLOATING ACTIONS
+     ============================================ -->
+<div class="float-stack">
+  <button class="fab fab-top" id="toTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+  <a class="fab fab-wa" href="https://wa.me/254726117905" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.2L2 22l4.9-1.3c1.5.8 3.3 1.3 5.1 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3C4.2 15 3.8 13.5 3.8 12c0-4.5 3.7-8.2 8.2-8.2s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2z"/></svg>
+  </a>
+</div>
+
+<script>
+/* ============================================
+   SCROLL PROGRESS + NAV STATE
+   ============================================ */
+const siteNav = document.getElementById('siteNav');
+const scrollProgress = document.getElementById('scrollProgress');
+const toTopBtn = document.getElementById('toTop');
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  siteNav.classList.toggle('scrolled', y > 40);
+  toTopBtn.classList.toggle('show', y > 600);
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  scrollProgress.style.width = docH > 0 ? `${(y / docH) * 100}%` : '0%';
+}, { passive: true });
+
+/* ============================================
+   MOBILE NAV TOGGLE
+   ============================================ */
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  const isOpen = navLinks.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', isOpen);
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
+}));
+
+toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* ============================================
+   HERO BUBBLES (decorative, CSS-driven)
+   ============================================ */
+const bubbleField = document.getElementById('heroBubbles');
+const BUBBLE_COUNT = 16;
+for (let i = 0; i < BUBBLE_COUNT; i++) {
+  const b = document.createElement('span');
+  const size = 6 + Math.random() * 22;
+  b.style.width = `${size}px`;
+  b.style.height = `${size}px`;
+  b.style.left = `${Math.random() * 100}%`;
+  b.style.setProperty('--drift', `${(Math.random() - 0.5) * 120}px`);
+  b.style.animationDuration = `${9 + Math.random() * 10}s`;
+  b.style.animationDelay = `${Math.random() * 10}s`;
+  bubbleField.appendChild(b);
+}
+
+/* ============================================
+   ANIMATED COUNTERS
+   ============================================ */
+function animateCount(el){
+  const target = parseInt(el.dataset.count, 10);
+  const duration = 1400;
+  const start = performance.now();
+  function tick(now){
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const countEls = document.querySelectorAll('.count[data-count]');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCount(entry.target);
+      countObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.6 });
+countEls.forEach(el => countObserver.observe(el));
+
+/* ============================================
+   SERVICES TABS
+   ============================================ */
+const tabButtons = document.querySelectorAll('#serviceIndex button');
+const panels = document.querySelectorAll('.service-panel');
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabButtons.forEach(b => b.setAttribute('aria-selected', 'false'));
+    btn.setAttribute('aria-selected', 'true');
+    panels.forEach(p => p.classList.remove('active'));
+    document.getElementById(btn.dataset.target).classList.add('active');
+  });
+});
+
+/* ============================================
+   BEFORE / AFTER SLIDER
+   ============================================ */
+const baSlider = document.getElementById('baSlider');
+const baAfter = document.getElementById('baAfter');
+const baHandle = document.getElementById('baHandle');
+baHandle.setAttribute('tabindex', '0');
+baHandle.setAttribute('role', 'slider');
+baHandle.setAttribute('aria-valuemin', '0');
+baHandle.setAttribute('aria-valuemax', '100');
+baHandle.setAttribute('aria-valuenow', '50');
+
+function setBaPosition(pct){
+  pct = Math.max(2, Math.min(98, pct));
+  baAfter.style.clipPath = `inset(0 0 0 ${pct}%)`;
+  baHandle.style.left = `${pct}%`;
+  baHandle.setAttribute('aria-valuenow', Math.round(pct));
+}
+function baFromClientX(clientX){
+  const rect = baSlider.getBoundingClientRect();
+  const pct = ((clientX - rect.left) / rect.width) * 100;
+  setBaPosition(pct);
+}
+let baDragging = false;
+baHandle.addEventListener('pointerdown', (e) => { baDragging = true; baHandle.setPointerCapture(e.pointerId); });
+baSlider.addEventListener('pointerdown', (e) => { baDragging = true; baFromClientX(e.clientX); });
+window.addEventListener('pointermove', (e) => { if (baDragging) baFromClientX(e.clientX); });
+window.addEventListener('pointerup', () => { baDragging = false; });
+baHandle.addEventListener('keydown', (e) => {
+  const current = parseFloat(baHandle.style.left) || 50;
+  if (e.key === 'ArrowLeft') setBaPosition(current - 4);
+  if (e.key === 'ArrowRight') setBaPosition(current + 4);
+});
+
+/* ============================================
+   GALLERY FILTERS + LIGHTBOX
+   ============================================ */
+const filterButtons = document.querySelectorAll('#galleryFilters button');
+const galleryButtons = Array.from(document.querySelectorAll('#galleryGrid button'));
+
+filterButtons.forEach(fb => {
+  fb.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    fb.classList.add('active');
+    const filter = fb.dataset.filter;
+    galleryButtons.forEach(gb => {
+      const show = filter === 'all' || gb.dataset.cat === filter;
+      gb.classList.toggle('hidden', !show);
+    });
+  });
+});
+
+const lightbox = document.getElementById('lightbox');
+const lbImage = document.getElementById('lbImage');
+let lbIndex = 0;
+
+function visibleGalleryButtons(){ return galleryButtons.filter(b => !b.classList.contains('hidden')); }
+function openLightbox(btn){
+  const list = visibleGalleryButtons();
+  lbIndex = list.indexOf(btn);
+  lbImage.src = btn.dataset.full;
+  lbImage.alt = btn.dataset.cap || '';
+  lightbox.classList.add('open');
+}
+function closeLightbox(){ lightbox.classList.remove('open'); }
+function showRelative(delta){
+  const list = visibleGalleryButtons();
+  lbIndex = (lbIndex + delta + list.length) % list.length;
+  openLightbox(list[lbIndex]);
+}
+galleryButtons.forEach(btn => btn.addEventListener('click', () => openLightbox(btn)));
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', () => showRelative(-1));
+document.getElementById('lbNext').addEventListener('click', () => showRelative(1));
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') showRelative(-1);
+  if (e.key === 'ArrowRight') showRelative(1);
+});
+
+/* ============================================
+   TESTIMONIAL CAROUSEL
+   ============================================ */
+const testiSlides = document.querySelectorAll('.testi-slide');
+const testiDots = document.querySelectorAll('#testiDots button');
+let testiIndex = 0;
+let testiTimer;
+
+function showTesti(i){
+  testiSlides.forEach(s => s.classList.remove('active'));
+  testiDots.forEach(d => d.classList.remove('active'));
+  testiSlides[i].classList.add('active');
+  testiDots[i].classList.add('active');
+  testiIndex = i;
+}
+function nextTesti(){ showTesti((testiIndex + 1) % testiSlides.length); }
+function startTestiAuto(){ testiTimer = setInterval(nextTesti, 6000); }
+function resetTestiAuto(){ clearInterval(testiTimer); startTestiAuto(); }
+
+testiDots.forEach(dot => dot.addEventListener('click', () => {
+  showTesti(parseInt(dot.dataset.i, 10));
+  resetTestiAuto();
+}));
+startTestiAuto();
+
+/* ============================================
+   CONTACT FORM VALIDATION (client-side only)
+   ============================================ */
+const form = document.getElementById('quoteForm');
+const formMsg = document.getElementById('formMsg');
+const kenyanPhone = /^(?:\+254|0)(7|1)\d{8}$/;
+
+function setInvalid(fieldId, invalid){
+  document.getElementById(fieldId).classList.toggle('invalid', invalid);
+}
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  formMsg.classList.remove('show');
+
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim().replace(/\s+/g, '');
+  const service = document.getElementById('service').value;
+  const message = document.getElementById('message').value.trim();
+
+  let valid = true;
+  if (name.length < 2) { setInvalid('f-name', true); valid = false; } else setInvalid('f-name', false);
+  if (!kenyanPhone.test(phone)) { setInvalid('f-phone', true); valid = false; } else setInvalid('f-phone', false);
+  if (!service) { setInvalid('f-service', true); valid = false; } else setInvalid('f-service', false);
+  if (message.length < 5) { setInvalid('f-message', true); valid = false; } else setInvalid('f-message', false);
+
+  if (!valid) {
+    form.querySelector('.invalid input, .invalid select, .invalid textarea')?.focus();
+    return;
+  }
+
+  // No backend is connected in this static build — this hands the enquiry to WhatsApp
+  // so it reaches the team immediately. Swap this block for a real form submission
+  // once a backend / form endpoint is available.
+  formMsg.classList.add('show');
+  form.reset();
+
+  const waText = `New quote request from the website\nName: ${name}\nPhone: ${phone}\nService: ${service}\nMessage: ${message}`;
+  const waUrl = `https://wa.me/254726117905?text=${encodeURIComponent(waText)}`;
+  setTimeout(() => window.open(waUrl, '_blank', 'noopener'), 900);
+});
+
+/* ============================================
+   REVEAL ON SCROLL
+   ============================================ */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => io.observe(el));
+
+/* ============================================
+   FOOTER YEAR
+   ============================================ */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
